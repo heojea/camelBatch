@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	@heojea 20171215
+	@Auth : 허재연
+	@DESC : jetty 기반의 http rest 서버를 만들도록 한다. client는 별도로 만들지 않고 본 페이지에 만들도록 할것이다.
+
+	POST:::CREATE
+	GET:::READ
+	PUT:::UPDATE
+	DELETE:::DELETE
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!--
+		Jetty Security handling START
+		rest 태그당 적용되는거라서 별도의 옵션을 넣지않고 rest 태그를 두개설정할 경우 에러가 발생 한다.
+	-->
+	<bean id="constraint" class="org.eclipse.jetty.util.security.Constraint">
+		<property name="name" value="BASIC"/>
+		<property name="roles" value="rolename"/>
+		<property name="authenticate" value="false"/>
+	</bean>
+
+	<bean id="constraintMapping" class="org.eclipse.jetty.security.ConstraintMapping">
+		<property name="constraint" ref="constraint" />
+		<property name="pathSpec" value="/*" />
+	</bean>
+
+	<bean id="securityHandler" class="co.kr.jettyRest.security.ConstraintSecurityHandlerImpl">
+		<!--
+		임의 클래스 ConstraintSecurityHandlerImpl class에서 주입하도록 수정
+		<property name="loginService">
+			<bean class="co.kr.jettyRest.security.HardcodedLoginService" />
+		</property>
+		-->
+		<property name="authenticator">
+			<bean class="org.eclipse.jetty.security.authentication.BasicAuthenticator"/>
+		</property>
+		<property name="constraintMappings">
+			<list>
+				<ref bean="constraintMapping"/>
+			</list>
+		</property>
+	</bean>
+	<!-- Jetty Security handling END -->
+
+	<!-- 스프링 빈을 이용하여 프로세서를 정의한다.-->
+	<bean id="helloProcess"       class="co.kr.jettyRest.process.HelloProcess"     />
+	<bean id="helloProcessPost"   class="co.kr.jettyRest.process.HelloProcessPost" />
+	<bean id="helloProcessPut"    class="co.kr.jettyRest.process.HelloProcessPut"  />
+	<bean id="helloProcessDelete" class="co.kr.jettyRest.process.HelloProcessDelete" />
+
+	<!-- camel Context -->
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<!--
+			레스트 서버로 활용될 서저를 지정하고 옵션을 정의 한다.
+			bindingMode="json" json으로 지정
+			enableCORS="true"  크로스 도메인에서 통신시 true
+		-->
+		<restConfiguration component="jetty" host="127.0.0.1" port="9090" bindingMode="json"  enableCORS="true" scheme="http" >
+			<!--<endpointProperty key="sessionSupport" value="true" />-->
+			<!--<endpointProperty key="httpClient.idleTimeout" value="5000" />-->
+			<endpointProperty   key="handlers" value="securityHandler" />
+			<dataFormatProperty key="prettyPrint" value="true" />
+			<dataFormatProperty key="json.in.disableFeatures" value="FAIL_ON_UNKNOWN_PROPERTIES,ADJUST_DATES_TO_CONTEXT_TIME_ZONE"/>
+			<dataFormatProperty key="json.in.enableFeatures" value="FAIL_ON_NUMBERS_FOR_ENUMS,USE_BIG_DECIMAL_FOR_FLOATS"/>
+		</restConfiguration>
+
+		<!--
+			### GET 방식 기술 ###
+			### client ajax GET call 방식 기술
+			$.ajax({
+					method : "GET",
+					url: "http://localhost:9090/api/hello",
+					data: {user:'GET-heojea',name:'GET-abcde'},
+					contentType : "text/plain", // 있어도 되고 없어도 되고
+					success: function (response) {
+						console.log(response);
+					},
+					complete: function (response) {
+						console.log("complete ~~");
+					},
+					error: function (response) {
+						console.log("Falla - " + response.d);
+					}
+			});
+			### POST 방식 기술 ####
+			### client ajax POST call 방식 기술
+			   $.ajax({
+					method : "POST",
+					url: "http://localhost:9090/api/bye",
+					data: JSON.stringify({user:'heojea',name:'deahan'}),  //POST 방식은 꼭 stringify 해줘야함 에러남
+					contentType : "text/plain",    // 꼭 있어야됨 에러남
+					success: function (response) {
+						console.log(response);
+					},
+					complete: function (response) {
+						console.log("complete ~~");
+					},
+					error: function (response) {
+						console.log("Falla - " + response);
+					}
+				});
+		-->
+
+		<rest path="/api">
+			<get    uri="/bye"><to uri="bean:helloProcess" />      </get>
+			<post   uri="/bye">
+				<route>
+					<to uri="bean:helloProcessPost"  />
+				</route>
+			</post>
+
+			<put    uri="/bye"><to uri="bean:helloProcessPut" />   </put>
+			<delete uri="/bye"><to uri="bean:helloProcessDelete" /></delete>
+		</rest>
+
+
+		<!-- router 정의 부분  -->
+		<!--<route>
+			<from uri="direct:hello"/>
+			<process ref="helloProcess" />
+			<transform>
+				<simple>${body}</simple>
+			</transform>
+		</route>-->
+
+		<!--<route>
+			<from uri="direct:bye"/>
+			<log message="process before log pring test ========= " />
+			<process ref="helloProcessPost" />
+		</route>-->
+	</camelContext>
+</beans>
