@@ -57,12 +57,12 @@ import java.sql.Statement;
  *
  * Author: Karl Meissner karl@meissnersd.com
  */
-public class ConnectDatabase {
+public class ConnectDatabase_HSQL {
 
     Connection conn;                                                //our connnection to the db - presist for life of program
 
     // we dont want this garbage collected until we are done
-    public ConnectDatabase(String db_file_name_prefix) throws Exception {    // note more general exception
+    public ConnectDatabase_HSQL(String db_file_name_prefix) throws Exception {    // note more general exception
 
         // Load the HSQL Database Engine JDBC driver
         // hsqldb.jar should be in the class path or made part of the current jar
@@ -158,10 +158,10 @@ public class ConnectDatabase {
 
     public static void main(String[] args) {
 
-    	ConnectDatabase db = null;
+    	ConnectDatabase_HSQL db = null;
 
         try {
-            db = new ConnectDatabase("db_file");
+            db = new ConnectDatabase_HSQL("db_file");
         } catch (Exception ex1) {
             ex1.printStackTrace();    // could not start db
 
