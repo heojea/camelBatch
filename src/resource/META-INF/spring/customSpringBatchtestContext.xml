@@ -31,7 +31,8 @@
     <batch:job id="echoJob">
         <batch:step id="echoStep">
             <batch:tasklet>
-                <batch:chunk reader="customCamelReader" writer="customCamelItemWriter" processor="customCamelItemProcessor" commit-interval="3"/>
+                <!-- <batch:chunk reader="customCamelFileReader" writer="customCamelItemWriter" processor="customCamelItemFileProcessor" commit-interval="3"/> -->
+                <batch:chunk reader="customCamelFileReader" processor="customCamelItemFileProcessor"  writer="customCamelItemFileWriter" commit-interval="3" />
             </batch:tasklet>
         </batch:step>
         <batch:listeners>
@@ -55,18 +56,32 @@
                 <camel:simple>Echo ${body}</camel:simple>
             </camel:setBody>
         </camel:route>
+        
+        <camel:route>
+            <camel:from uri="direct:file-processor"/>
+            <camel:to   uri="file:receiveFileComplete?fileName=MyFile.txt"/>
+        </camel:route>
+        
         <camel:route>
             <camel:from uri="direct:header"/>
             <camel:to uri="spring-batch:echoJob"/>
             <camel:to uri="mock:header"/>
         </camel:route>
         
-          <camel:route>
+        <!-- Timer Sample  -->
+        <!-- <camel:route>
 		    <camel:from uri="timer://foo?fixedRate=true&amp;period=600"/>
 		    <camel:setBody><camel:simple>abcdcde</camel:simple></camel:setBody>
 		    <camel:to uri="stream:out"/>
 		    <camel:to uri="seda:inputQueue"/>
-		  </camel:route>
+		</camel:route> -->
+
+		<!-- File Sample  -->
+        <!-- <camel:route> -->
+		    <!-- <camel:from uri="file://C:/in/?fileName=MyFile.txt&charset=utf-8"/> -->
+		    <!-- <camel:from uri="file:receiveFile?fileName=MyFile.txt"/>
+		    <camel:to   uri="file:receiveFileComplete?fileName=MyFile.txt"/> -->
+		<!-- </camel:route> -->
     </camel:camelContext>
 
     <camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
@@ -86,22 +101,39 @@
           class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
         <property name="jobRepository" ref="jobRepository"/>
     </bean>
-
+	
+	<!-- Reader -->
     <bean id="customCamelReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemReader">
         <constructor-arg ref="consumerTemplate"/>
         <constructor-arg value="seda:inputQueue"/>
     </bean>
+    
+    <bean id="customCamelFileReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReader">
+        <constructor-arg ref="consumerTemplate"/>
+        <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/>
+    </bean>
 
+	<!-- Writer  -->
     <bean id="customCamelItemWriter" class="org.apache.camel.component.spring.batch.support.CustomCamelItemWriter">
         <constructor-arg ref="template"/>
         <constructor-arg value="mock:output"/>
     </bean>
+    <bean id="customCamelItemFileWriter" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileWriter">
+        <constructor-arg ref="template"/>
+        <constructor-arg value="mock:output"/>
+    </bean>    
 
+	<!-- Process -->
     <bean id="customCamelItemProcessor" class="org.apache.camel.component.spring.batch.support.CustomCamelItemProcessor">
         <constructor-arg ref="template"/>
         <constructor-arg value="direct:processor"/>
     </bean>
+    <bean id="customCamelItemFileProcessor" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileProcessor">
+        <constructor-arg ref="template"/>
+        <constructor-arg value="direct:file-processor"/>
+    </bean>
 
+	<!-- Listener  -->
     <bean id="camelJobExecutionListener"
           class="org.apache.camel.component.spring.batch.support.CamelJobExecutionListener">
         <constructor-arg ref="template"/>

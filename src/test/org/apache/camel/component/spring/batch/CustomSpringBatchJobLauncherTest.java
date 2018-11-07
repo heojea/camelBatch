@@ -58,6 +58,7 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
 
     @Override
     protected AbstractApplicationContext createApplicationContext() {
-        return new ClassPathXmlApplicationContext("org/apache/camel/component/spring/batch/customSpringBatchtestContext.xml");
+        return new ClassPathXmlApplicationContext("META-INF/spring/customSpringBatchtestContext.xml");
+        
     }
 }
