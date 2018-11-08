@@ -30,16 +30,16 @@ import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.beans.factory.InitializingBean;
 
-public class CustomCamelItemFileReader<I> extends ServiceSupport implements ItemReader<I>, InitializingBean {
+public class CustomCamelItemFileFlatReader<I> extends ServiceSupport implements ItemReader<I>, InitializingBean {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CustomCamelItemFileReader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomCamelItemFileFlatReader.class);
 
     private final CamelContext camelContext;
     private final ConsumerTemplate consumerTemplate;
 
     private final String endpointUri;
 
-    public CustomCamelItemFileReader(ConsumerTemplate consumerTemplate, String endpointUri) {
+    public CustomCamelItemFileFlatReader(ConsumerTemplate consumerTemplate, String endpointUri) {
         this.consumerTemplate = consumerTemplate;
         this.camelContext = consumerTemplate.getCamelContext();
         this.endpointUri = endpointUri;

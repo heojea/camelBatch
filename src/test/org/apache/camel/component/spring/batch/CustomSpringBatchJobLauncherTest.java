@@ -48,6 +48,12 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     	template.sendBody("direct:start", "Start batch!");
     	//Thread.sleep(40000000);
     }
+    
+    @Test
+    public void cutstomTestLargeFileJobLauncher() throws InterruptedException {
+    	template.sendBody("direct:large-file-batch-start", "Start batch!");
+    	//Thread.sleep(40000000);
+    }
 
     @Test
     public void cutestJobLauncherRef() throws InterruptedException {
