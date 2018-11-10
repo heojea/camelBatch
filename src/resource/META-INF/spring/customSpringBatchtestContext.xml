@@ -97,12 +97,12 @@
 		</camel:route> -->
 
 		<!-- File Sample  -->
-        <camel:route>
-		    <!-- <camel:from uri="file://C:/in/?fileName=MyFile.txt"/> -->
+        <!-- <camel:route>
+		    <camel:from uri="file://C:/in/?fileName=MyFile.txt"/>
 		    <camel:from uri="file:receiveFile?fileName=MyFile.txt"/>
 		    <camel:to   uri="file:receiveFileComplete?fileName=MyFile.txt"/>
 		    
-		</camel:route>
+		</camel:route> -->
     </camel:camelContext>
 
     <camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
