@@ -20,12 +20,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:aop = "http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
           http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
 
+	<!-- import  -->
+	<import resource="common/data-source-context.xml" />
+	
     <!-- Spring Batch task -->
 	<!-- 단일 대상 처리 프로세서 -->
     <batch:job id="echoJob">
@@ -42,7 +47,7 @@
     
 	    
 	<!-- 대용량 처리(FILE)   -->	
-	<batch:job id="myJob" xmlns="http://www.springframework.org/schema/batch">
+	<batch:job id="myJob" job-repository="jobRepository" >
 	    <batch:step id="master.Step">
 	        <batch:partition step="slave.Step" partitioner="myPartitioner">
 	            <batch:handler grid-size="4" task-executor="myTaskExecutor"/>
@@ -50,9 +55,9 @@
 	    </batch:step>
 	</batch:job>
 	
-	<batch:step id="slave.Step" xmlns="http://www.springframework.org/schema/batch">
-	    <batch:tasklet>
-	        <batch:chunk reader="customCamelItemFileFlatReader" writer="flatFileItemWriter" commit-interval="1" />
+	<batch:step id="slave.Step" job-repository="jobRepository">
+	    <batch:tasklet >
+	        <batch:chunk  reader="customCamelItemFileFlatReader" writer="flatFileItemWriter" commit-interval="1" />
 	    </batch:tasklet>
 	</batch:step>
 
@@ -106,23 +111,52 @@
     </camel:camelContext>
 
     <camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
-
-    <camel:template id="template" camelContextId="camel"/>
+    <camel:template         id="template"         camelContextId="camel"/>
 
     <!-- Spring Batch infrastructure -->
 	<bean id="myTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
 
-    <bean id="jobRepository"
-          class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
-        <property name="transactionManager" ref="transactionManager"/>
-    </bean>
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
 
-    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+	<bean class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<property name="jobRegistry" ref="jobRegistry"/>
+	</bean>
 
-    <bean id="jobLauncher"
-          class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
-        <property name="jobRepository" ref="jobRepository"/>
-    </bean>
+	<bean id="jobRepository"
+		class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"
+		p:dataSource-ref="dataSource" p:transactionManager-ref="transactionManager" p:tablePrefix="BATCH_" p:maxVarCharLength="1000" />
+
+	<bean id="mapJobRepository"
+		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
+		lazy-init="true" autowire-candidate="false" />
+
+	<bean id="jobOperator"
+		class="org.springframework.batch.core.launch.support.SimpleJobOperator"
+		p:jobLauncher-ref="jobLauncher" p:jobExplorer-ref="jobExplorer"
+		p:jobRepository-ref="jobRepository" p:jobRegistry-ref="jobRegistry" />
+
+	<bean id="jobExplorer"
+		class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean"
+		p:dataSource-ref="dataSource" />
+
+	<bean id="jobRegistry"
+		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- <aop:config>
+	    <aop:advisor pointcut="execution(* org.springframework.batch.core..*Repository+.*(..))" 
+	                 advice-ref="txAdvice"/>
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	    <tx:attributes>
+	        <tx:method name="*"/>
+	    </tx:attributes>
+	</tx:advice> -->
 	
 	<!-- Reader -->
     <bean id="customCamelReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemReader">
@@ -156,11 +190,11 @@
         <property name="lineAggregator">
             <bean class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
                 <property name="delimiter" value=","/>
-                <property name="fieldExtractor">
+                <!-- <property name="fieldExtractor">
                     <bean class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
                         <property name="names" value="firstName, lastName, city" />
                     </bean>
-                </property>
+                </property> -->
             </bean>
         </property>
     </bean>
@@ -184,6 +218,7 @@
     
     <!-- partitioner -->
     <bean id="myPartitioner" class="org.apache.camel.component.spring.batch.partitioner.CustomPartitioner" />
+    
     
     
 

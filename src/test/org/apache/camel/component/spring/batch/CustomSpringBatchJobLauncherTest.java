@@ -21,6 +21,8 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -50,7 +52,7 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     }
     
     @Test
-    public void cutstomTestLargeFileJobLauncher() throws InterruptedException {
+    public void cutstomTestPartitionnerJobLauncher() throws InterruptedException {
     	template.sendBody("direct:large-file-batch-start", "Start batch!");
     	//Thread.sleep(40000000);
     }
