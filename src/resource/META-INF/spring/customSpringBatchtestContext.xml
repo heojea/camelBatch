@@ -218,8 +218,4 @@
     
     <!-- partitioner -->
     <bean id="myPartitioner" class="org.apache.camel.component.spring.batch.partitioner.CustomPartitioner" />
-    
-    
-    
-
 </beans>
