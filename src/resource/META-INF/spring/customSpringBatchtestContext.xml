@@ -64,6 +64,12 @@
     <!-- Camel infrastructure -->
 
     <camel:camelContext id="camel">
+    	<!-- init start dsl  -->
+		<camel:route>
+			<camel:from uri="timer://initStart?repeatCount=1" />
+			<camel:to uri="direct:large-file-batch-start"/>
+		</camel:route>    
+    
         <camel:route>
             <camel:from uri="direct:start"/>
             <camel:to uri="spring-batch:echoJob"/>
@@ -93,6 +99,7 @@
             <camel:to uri="mock:header"/>
         </camel:route>
         
+
         <!-- Timer Sample  -->
         <!-- <camel:route>
 		    <camel:from uri="timer://foo?fixedRate=true&amp;period=600"/>
@@ -148,16 +155,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- <aop:config>
-	    <aop:advisor pointcut="execution(* org.springframework.batch.core..*Repository+.*(..))" 
-	                 advice-ref="txAdvice"/>
-	</aop:config>
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-	    <tx:attributes>
-	        <tx:method name="*"/>
-	    </tx:attributes>
-	</tx:advice> -->
-	
 	<!-- Reader -->
     <bean id="customCamelReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemReader">
         <constructor-arg ref="consumerTemplate"/>
