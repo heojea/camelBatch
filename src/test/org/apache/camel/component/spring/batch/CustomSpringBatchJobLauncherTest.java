@@ -40,9 +40,9 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     public void setUp() throws Exception {
         super.setUp();
 
-        /*for (String message : inputMessages) {
+        for (String message : inputMessages) {
             template.sendBody("seda:inputQueue", message);
-        }*/
+        }
     }
 
     @Test
@@ -55,13 +55,6 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     public void cutstomTestPartitionnerJobLauncher() throws InterruptedException {
     	template.sendBody("direct:large-file-batch-start", "Start batch!");
     	Thread.sleep(40000000);
-    }
-
-    @Test
-    public void cutestJobLauncherRef() throws InterruptedException {
-    	 template.sendBody("seda:inputQueue", "foo");
-
-        
     }
 
     @Override

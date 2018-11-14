@@ -47,7 +47,7 @@
     
 	    
 	<!-- 대용량 처리(FILE)   -->	
-	<batch:job id="myJob" job-repository="jobRepository" >
+	<batch:job id="myJob" >
 	    <batch:step id="master.Step">
 	        <batch:partition step="slave.Step" partitioner="myPartitioner">
 	            <batch:handler grid-size="4" task-executor="myTaskExecutor"/>
@@ -55,7 +55,7 @@
 	    </batch:step>
 	</batch:job>
 	
-	<batch:step id="slave.Step" job-repository="jobRepository">
+	<batch:step id="slave.Step">
 	    <batch:tasklet >
 	        <batch:chunk  reader="customCamelItemFileFlatReader" writer="flatFileItemWriter" commit-interval="1" />
 	    </batch:tasklet>
@@ -67,8 +67,15 @@
     	<!-- init start dsl  -->
 		<camel:route>
 			<camel:from uri="timer://initStart?repeatCount=1" />
-			<camel:to uri="direct:large-file-batch-start"/>
+			<!-- <camel:to uri="direct:large-file-batch-start"/> -->
+			<camel:to uri="direct:start"/>
 		</camel:route>    
+		
+		<camel:route>
+			<camel:from uri="timer://sedaStart?repeatCount=3" />
+			<camel:setBody><camel:simple> new String[]{"foo", "bar", "baz", null}</camel:simple></camel:setBody>
+			<camel:to uri="seda:inputQueue"/>
+		</camel:route>
     
         <camel:route>
             <camel:from uri="direct:start"/>
@@ -133,15 +140,14 @@
 
 	<bean id="jobRepository"
 		class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean"
-		p:dataSource-ref="dataSource" p:transactionManager-ref="transactionManager" p:tablePrefix="BATCH_" p:maxVarCharLength="1000" />
+		p:dataSource-ref="dataSource" p:transactionManager-ref="transactionManager" p:databaseType="hsql" />
 
 	<bean id="mapJobRepository"
 		class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"
 		lazy-init="true" autowire-candidate="false" />
 
-	<bean id="jobOperator"
-		class="org.springframework.batch.core.launch.support.SimpleJobOperator"
-		p:jobLauncher-ref="jobLauncher" p:jobExplorer-ref="jobExplorer"
+	<bean id="jobOperator" class="org.springframework.batch.core.launch.support.SimpleJobOperator"
+		p:jobLauncher-ref="jobLauncher"     p:jobExplorer-ref="jobExplorer"
 		p:jobRepository-ref="jobRepository" p:jobRegistry-ref="jobRegistry" />
 
 	<bean id="jobExplorer"

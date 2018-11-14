@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.spring.batch.support;
 
+import java.util.HashMap;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.support.ServiceSupport;
@@ -54,7 +56,6 @@ public class CustomCamelItemReader<I> extends ServiceSupport implements ItemRead
     public I read() throws Exception {
     	System.out.println("CamelItemReader read() 실행");
     	System.out.println("endpointUri=" + endpointUri);
-    	
         LOG.info("reading new item...");
         I item = (I) consumerTemplate.receiveBody(endpointUri);
         LOG.info("read item [{}]", item);
