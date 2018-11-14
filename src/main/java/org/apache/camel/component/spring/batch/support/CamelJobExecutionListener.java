@@ -19,6 +19,7 @@ package org.apache.camel.component.spring.batch.support;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
@@ -46,6 +47,9 @@ public class CamelJobExecutionListener implements JobExecutionListener {
     public void afterJob(JobExecution jobExecution) {
         LOG.debug("sending after job execution event [{}]...", jobExecution);
         producerTemplate.sendBodyAndHeader(endpointUri, jobExecution, EventType.HEADER_KEY, EventType.AFTER.name());
+        
+        // Setting the exception in batch EXIT MESSAGE
+        jobExecution.setExitStatus(new ExitStatus("ERROR","Exception in JOB"));
         LOG.debug("sent after job execution event");
     }
 
