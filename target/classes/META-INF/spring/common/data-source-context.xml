@@ -5,7 +5,7 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
 	<!--  Initialise the database before every test case: -->
-<!--  	<bean id="dataSourceInitializer" class="org.apache.camel.component.spring.batch.DataSourceInitializer">
+<!--   	<bean id="dataSourceInitializer" class="org.apache.camel.component.spring.batch.DataSourceInitializer">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="initialize" value="${batch.data.source.init}"/>
 		<property name="initScripts">
@@ -15,7 +15,7 @@
 				<value>${batch.business.schema.script}</value>
 			</list>
 		</property>
-	</bean>  -->  
+	</bean>  -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName"  value="${batch.jdbc.driver}" />

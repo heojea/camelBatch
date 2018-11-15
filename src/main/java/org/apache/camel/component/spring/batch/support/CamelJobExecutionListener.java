@@ -50,6 +50,7 @@ public class CamelJobExecutionListener implements JobExecutionListener {
         
         // Setting the exception in batch EXIT MESSAGE
         jobExecution.setExitStatus(new ExitStatus("ERROR","Exception in JOB"));
+        
         LOG.debug("sent after job execution event");
     }
 

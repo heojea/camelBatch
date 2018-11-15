@@ -54,7 +54,7 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     @Test
     public void cutstomTestPartitionnerJobLauncher() throws InterruptedException {
     	template.sendBody("direct:large-file-batch-start", "Start batch!");
-    	Thread.sleep(40000000);
+    	
     }
 
     @Override
