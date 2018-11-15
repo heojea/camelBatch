@@ -34,7 +34,6 @@ public class CustomCamelItemReader<I> extends ServiceSupport implements ItemRead
 
     private final CamelContext camelContext;
     private final ConsumerTemplate consumerTemplate;
-
     private final String endpointUri;
 
     public CustomCamelItemReader(ConsumerTemplate consumerTemplate, String endpointUri) {

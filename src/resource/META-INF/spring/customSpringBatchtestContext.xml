@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:camel="http://camel.apache.org/schema/spring"
@@ -33,10 +15,10 @@
 	
     <!-- Spring Batch task -->
 	<!-- 단일 대상 처리 프로세서 -->
-    <batch:job id="echoJob">
-        <batch:step id="echoStep">
+    <batch:job id="standardJob">
+        <batch:step id="standardJob-Step">
             <batch:tasklet>
-                <batch:chunk reader="customCamelReader" writer="customCamelItemWriter" processor="customCamelItemProcessor" commit-interval="3"/>
+                <batch:chunk reader="customCamelReader" processor="customCamelItemProcessor" writer="customCamelItemWriter"  commit-interval="3"/>
                 <!-- <batch:chunk reader="customCamelFileReader" processor="customCamelItemFileProcessor"  writer="customCamelItemFileWriter" commit-interval="3" /> -->
             </batch:tasklet>
         </batch:step>
@@ -45,19 +27,17 @@
         </batch:listeners>
     </batch:job>
     
-	    
-	<!-- 대용량 처리(FILE)   -->	
-	<batch:job id="myJob" >
-	    <batch:step id="master.Step">
-	        <batch:partition step="slave.Step" partitioner="myPartitioner">
+	<batch:job id="partitinnerJob" >
+	    <batch:step id="partitinnerJob-master.Step">
+	        <batch:partition step="partitinnerJob-slave.Step" partitioner="myPartitioner">
 	            <batch:handler grid-size="4" task-executor="myTaskExecutor"/>
 	        </batch:partition>
 	    </batch:step>
 	</batch:job>
 	
-	<batch:step id="slave.Step">
+	<batch:step id="partitinnerJob-slave.Step">
 	    <batch:tasklet >
-	        <batch:chunk  reader="customCamelItemFileFlatReader" writer="flatFileItemWriter" commit-interval="1" />
+	        <batch:chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" />
 	    </batch:tasklet>
 	</batch:step>
 
@@ -79,12 +59,12 @@
     
         <camel:route>
             <camel:from uri="direct:start"/>
-            <camel:to uri="spring-batch:echoJob"/>
+            <camel:to uri="spring-batch:standardJob"/>
         </camel:route>
         
         <camel:route>
             <camel:from uri="direct:large-file-batch-start"/>
-            <camel:to uri="spring-batch:myJob"/>
+            <camel:to uri="spring-batch:partitinnerJob"/>
         </camel:route>
         
         <camel:route>
@@ -102,7 +82,7 @@
         
         <camel:route>
             <camel:from uri="direct:header"/>
-            <camel:to uri="spring-batch:echoJob"/>
+            <camel:to uri="spring-batch:standardJob"/>
             <camel:to uri="mock:header"/>
         </camel:route>
         
@@ -172,9 +152,10 @@
         <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/>
     </bean>
     
-    <bean id="customCamelItemFileFlatReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileFlatReader">
+    <bean id="customCamelItemFileReceiveReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReceiveReader">
         <constructor-arg ref="consumerTemplate"/>
-        <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/>
+        <constructor-arg value="file:receiveFile/"/>
+        <!-- <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/> -->
     </bean>
 
 	<!-- Writer  -->

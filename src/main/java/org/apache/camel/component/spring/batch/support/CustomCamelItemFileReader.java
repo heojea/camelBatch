@@ -57,8 +57,8 @@ public class CustomCamelItemFileReader<I> extends ServiceSupport implements Item
     @SuppressWarnings("unchecked")
     public I read() throws Exception {
     	
-    	System.out.println("CamelItemReader read() 실행");
-    	System.out.println("endpointUri=" + endpointUri);
+    	LOG.info("CamelItemReader read() 실행");
+    	LOG.info("endpointUri [{}]", endpointUri);
     	
         LOG.info("reading new item...");
         I item = (I) consumerTemplate.receiveBody(endpointUri);

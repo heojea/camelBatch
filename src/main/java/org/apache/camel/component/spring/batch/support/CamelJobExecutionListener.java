@@ -49,7 +49,7 @@ public class CamelJobExecutionListener implements JobExecutionListener {
         producerTemplate.sendBodyAndHeader(endpointUri, jobExecution, EventType.HEADER_KEY, EventType.AFTER.name());
         
         // Setting the exception in batch EXIT MESSAGE
-        jobExecution.setExitStatus(new ExitStatus("ERROR","Exception in JOB"));
+        //jobExecution.setExitStatus(new ExitStatus("ERROR","Exception in JOB"));
         
         LOG.debug("sent after job execution event");
     }
