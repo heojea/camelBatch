@@ -41,9 +41,9 @@ public class CustomCamelItemProcessor<I, O> implements ItemProcessor<I, O> {
     @Override
     @SuppressWarnings("unchecked")
     public O process(I i) throws Exception {
-        LOG.info("processing item [{}]...", i);
+        LOG.info("Exec class name[{}] producerTemplate.requestBody({} , {}) " ,this.getClass().getName() , endpointUri , i);
         O result = (O) producerTemplate.requestBody(endpointUri, i);
-        LOG.info("processed item");
+        LOG.info("O result [{}]" , result);
         return result;
     }
 

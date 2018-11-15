@@ -13,8 +13,7 @@
 	<!-- import  -->
 	<import resource="common/data-source-context.xml" />
 	
-    <!-- Spring Batch task -->
-	<!-- 단일 대상 처리 프로세서 -->
+	<!--###################### JOB standardJob ####################-->
     <batch:job id="standardJob">
         <batch:step id="standardJob-Step">
             <batch:tasklet>
@@ -27,6 +26,7 @@
         </batch:listeners>
     </batch:job>
     
+    <!--###################### JOB partitinnerJob ####################-->
 	<batch:job id="partitinnerJob" >
 	    <batch:step id="partitinnerJob-master.Step">
 	        <batch:partition step="partitinnerJob-slave.Step" partitioner="myPartitioner">
@@ -41,8 +41,9 @@
 	    </batch:tasklet>
 	</batch:step>
 
-    <!-- Camel infrastructure -->
-
+    <!--###################### Camel infrastructure ####################-->
+	<camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
+    <camel:template         id="template"         camelContextId="camel"/>
     <camel:camelContext id="camel">
     	<!-- init start dsl  -->
 		<camel:route>
@@ -85,7 +86,6 @@
             <camel:to uri="spring-batch:standardJob"/>
             <camel:to uri="mock:header"/>
         </camel:route>
-        
 
         <!-- Timer Sample  -->
         <!-- <camel:route>
@@ -104,10 +104,9 @@
 		</camel:route> -->
     </camel:camelContext>
 
-    <camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
-    <camel:template         id="template"         camelContextId="camel"/>
+    
 
-    <!-- Spring Batch infrastructure -->
+    <!--###################### Spring Batch infrastructure ####################-->
 	<bean id="myTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
 
 	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
@@ -141,7 +140,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- Reader -->
+	<!--###################### Reader ####################-->
     <bean id="customCamelReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemReader">
         <constructor-arg ref="consumerTemplate"/>
         <constructor-arg value="seda:inputQueue"/>
@@ -149,16 +148,16 @@
     
     <bean id="customCamelFileReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReader">
         <constructor-arg ref="consumerTemplate"/>
-        <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/>
+        <constructor-arg value="file://receiveFile?noop=false/"/>
+        <!-- <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/> -->
     </bean>
     
     <bean id="customCamelItemFileReceiveReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReceiveReader">
         <constructor-arg ref="consumerTemplate"/>
-        <constructor-arg value="file:receiveFile/"/>
-        <!-- <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/> -->
+        <constructor-arg value="file://receiveFile?noop=false/"/>
     </bean>
 
-	<!-- Writer  -->
+	<!--###################### Writer ####################-->
     <bean id="customCamelItemWriter" class="org.apache.camel.component.spring.batch.support.CustomCamelItemWriter">
         <constructor-arg ref="template"/>
         <constructor-arg value="mock:output"/>
@@ -183,7 +182,7 @@
         </property>
     </bean>
 
-	<!-- Process -->
+	<!--###################### Process ####################-->
     <bean id="customCamelItemProcessor" class="org.apache.camel.component.spring.batch.support.CustomCamelItemProcessor">
         <constructor-arg ref="template"/>
         <constructor-arg value="direct:processor"/>
@@ -193,13 +192,13 @@
         <constructor-arg value="direct:file-processor"/>
     </bean>
 
-	<!-- Listener  -->
+	<!--###################### Listener ####################-->
     <bean id="camelJobExecutionListener"
           class="org.apache.camel.component.spring.batch.support.CamelJobExecutionListener">
         <constructor-arg ref="template"/>
         <constructor-arg value="mock:jobExecutionEventsQueue"/>
     </bean>
     
-    <!-- partitioner -->
+    <!--###################### partitioner ####################-->
     <bean id="myPartitioner" class="org.apache.camel.component.spring.batch.partitioner.CustomPartitioner" />
 </beans>
