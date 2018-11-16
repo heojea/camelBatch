@@ -21,15 +21,18 @@ import java.util.List;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemWriter;
 
 public class CustomCamelItemFileWriter<I> implements ItemWriter<I> {
 
     private static final Logger LOG = LoggerFactory.getLogger(CustomCamelItemFileWriter.class);
-
     private final ProducerTemplate producerTemplate;
-
     private final String endpointUri;
+    private Object someObject;
 
     public CustomCamelItemFileWriter(ProducerTemplate producerTemplate, String endpointUri) {
         this.producerTemplate = producerTemplate;
@@ -45,6 +48,16 @@ public class CustomCamelItemFileWriter<I> implements ItemWriter<I> {
             producerTemplate.sendBody(endpointUri, item);
             LOG.info("wrote item");
         }
+    }
+    
+    @BeforeStep
+    public void retrieveInterstepData(StepExecution stepExecution) {
+        JobExecution jobExecution = stepExecution.getJobExecution();
+        ExecutionContext jobContext = jobExecution.getExecutionContext();
+        
+        
+        this.someObject = jobContext.get("someKey");
+        LOG.info("logic class[{}] method:retrieveInterstepData  jobExecution[{}] , jobContext[{}] , this.someObject[{}]" , this.getClass().getName() , jobExecution, jobContext,  this.someObject  );
     }
 
 }
