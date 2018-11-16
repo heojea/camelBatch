@@ -28,19 +28,19 @@
     </batch:job>
     
     <!--###################### JOB partitinnerJob ####################-->
-	<batch:job id="partitinnerJob" >
-	    <batch:step id="partitinnerJob-master.Step">
-	        <batch:partition step="partitinnerJob-slave.Step" partitioner="myPartitioner">
-	            <batch:handler grid-size="4" task-executor="myTaskExecutor"/>
-	        </batch:partition>
-	    </batch:step>
-	</batch:job>
+	<job id="partitinnerJob" xmlns="http://www.springframework.org/schema/batch">
+	    <step id="partitinnerJob-master.Step">
+	        <partition step="partitinnerJob-slave.Step" partitioner="myPartitioner">
+	            <handler grid-size="4" task-executor="myTaskExecutor"/>
+	        </partition>
+	    </step>
+	</job>
 	
-	<batch:step id="partitinnerJob-slave.Step">
-	    <batch:tasklet >
-	        <batch:chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" />
-	    </batch:tasklet>
-	</batch:step>
+	<step id="partitinnerJob-slave.Step" xmlns="http://www.springframework.org/schema/batch">
+	    <tasklet >
+	        <chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" />
+	    </tasklet>
+	</step>
 
     <!--###################### Camel infrastructure ####################-->
 	<camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>

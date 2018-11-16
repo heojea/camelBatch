@@ -15,7 +15,10 @@
  */
 package org.apache.camel.component.spring.batch.listener;
 
+import org.apache.camel.component.spring.batch.support.CamelItemProcessor;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.item.ExecutionContext;
@@ -25,7 +28,8 @@ import org.springframework.batch.item.ExecutionContext;
  * 
  */
 public class OutputFileListener {
-
+	private static final Logger LOG = LoggerFactory.getLogger(CamelItemProcessor.class);
+	
 	private String outputKeyName = "outputFile";
 
 	private String inputKeyName = "fileName";
@@ -55,6 +59,8 @@ public class OutputFileListener {
 			executionContext.putString(outputKeyName, path + FilenameUtils.getBaseName(inputName)
 					+ ".csv");
 		}
+		
+		LOG.info("this class[{}] inputName[{}] stepExecution.getStepName()[{}]  FilenameUtils.getBaseName(inputName)[{}]" ,this.getClass().getName() , inputName , stepExecution.getStepName() ,  FilenameUtils.getBaseName(inputName));
 	}
 
 }

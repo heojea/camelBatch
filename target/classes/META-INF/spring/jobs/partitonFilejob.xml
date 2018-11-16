@@ -12,28 +12,28 @@
 
 	
 	<!--###################### JOB standardJob ####################-->
-    <batch:job id="partitionJob" xmlns="http://www.springframework.org/schema/batch">
-		<batch:step id="step">
-			<batch:partition step="step1" partitioner="partitioner">
-				<batch:handler grid-size="2" task-executor="taskExecutor" />
-			</batch:partition>
-		</batch:step>
-	</batch:job>
+    <job id="partitionJob" xmlns="http://www.springframework.org/schema/batch">
+		<step id="step">
+			<partition step="step1" partitioner="partitioner">
+				<handler grid-size="2" task-executor="taskExecutor" />
+			</partition>
+		</step>
+	</job>
 
+	<step id="step1" xmlns="http://www.springframework.org/schema/batch">
+		<tasklet transaction-manager="transactionManager">
+			<chunk writer="itemWriter" reader="itemReader" processor="itemProcessor" commit-interval="10" />
+			<listeners>
+				<listener ref="fileNameListener" />
+			</listeners>
+		</tasklet>
+	</step>
+	
 	<bean id="partitioner" class="org.apache.camel.component.spring.batch.partitioner.MultiResourcePartitioner">
 		<property name="resources" value="classpath:data/iosample/input/delimited*.csv" />
 	</bean>
 
 	<bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
-
-	<batch:step id="step1" xmlns="http://www.springframework.org/schema/batch">
-		<batch:tasklet transaction-manager="transactionManager">
-			<batch:chunk writer="itemWriter" reader="itemReader" processor="itemProcessor" commit-interval="5" />
-			<batch:listeners>
-				<listener ref="fileNameListener" />
-			</batch:listeners>
-		</batch:tasklet>
-	</batch:step>
 
 	<bean id="fileNameListener" class="org.apache.camel.component.spring.batch.listener.OutputFileListener" scope="step">
 		<property name="path" value="file:./build/output/file/" />

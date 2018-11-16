@@ -576,3 +576,434 @@ INSERT INTO BATCH_JOB_EXECUTION VALUES(84,2,84,'2018-11-16 10:14:42.765000','201
 COMMIT
 DISCONNECT
 /*C266*/DISCONNECT
+/*C268*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C269*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(85)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=84
+INSERT INTO BATCH_JOB_INSTANCE VALUES(85,0,'partitionJob','b6345ecc1cec6c4d635aa8ad7e27daea')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(85)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=84
+INSERT INTO BATCH_JOB_EXECUTION VALUES(85,0,85,'2018-11-16 10:22:01.540000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 10:22:01.541000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(85,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542331320295-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(85,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=85
+INSERT INTO BATCH_JOB_EXECUTION VALUES(85,1,85,'2018-11-16 10:22:01.540000','2018-11-16 10:22:01.577000',NULL,'STARTED','UNKNOWN','','2018-11-16 10:22:01.578000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(263)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=262
+INSERT INTO BATCH_STEP_EXECUTION VALUES(263,0,'step',85,'2018-11-16 10:22:01.601000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.602000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(263,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=263
+INSERT INTO BATCH_STEP_EXECUTION VALUES(263,1,'step',85,'2018-11-16 10:22:01.607000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.607000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=263
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(263,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(264)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=263
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(265)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=264
+INSERT INTO BATCH_STEP_EXECUTION VALUES(264,0,'step1:partition1',85,'2018-11-16 10:22:01.647000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.656000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(265,0,'step1:partition0',85,'2018-11-16 10:22:01.651000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.656000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(264,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv"}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(265,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION VALUES(264,1,'step1:partition1',85,'2018-11-16 10:22:01.669000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.671000')
+COMMIT
+/*C270*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION VALUES(265,1,'step1:partition0',85,'2018-11-16 10:22:01.669000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.773000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(264,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C269*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(265,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C270*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(264,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION VALUES(264,2,'step1:partition1',85,'2018-11-16 10:22:01.669000',NULL,'STARTED',1,2,0,2,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.839000')
+COMMIT
+/*C269*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(265,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",70],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",5],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":5,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION VALUES(265,2,'step1:partition0',85,'2018-11-16 10:22:01.669000',NULL,'STARTED',1,5,0,5,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.846000')
+COMMIT
+/*C270*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(264,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C269*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(265,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION VALUES(265,3,'step1:partition0',85,'2018-11-16 10:22:01.669000',NULL,'STARTED',2,6,0,6,0,0,0,0,'EXECUTING','','2018-11-16 10:22:01.855000')
+COMMIT
+/*C270*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=264
+INSERT INTO BATCH_STEP_EXECUTION VALUES(264,3,'step1:partition1',85,'2018-11-16 10:22:01.669000','2018-11-16 10:22:01.854000','COMPLETED',1,2,0,2,0,0,0,0,'COMPLETED','','2018-11-16 10:22:01.855000')
+COMMIT
+/*C269*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(265,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=265
+INSERT INTO BATCH_STEP_EXECUTION VALUES(265,4,'step1:partition0',85,'2018-11-16 10:22:01.669000','2018-11-16 10:22:01.868000','COMPLETED',2,6,0,6,0,0,0,0,'COMPLETED','','2018-11-16 10:22:01.869000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=263
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(263,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=263
+INSERT INTO BATCH_STEP_EXECUTION VALUES(263,2,'step',85,'2018-11-16 10:22:01.607000','2018-11-16 10:22:01.881000','COMPLETED',3,8,0,8,0,0,0,0,'COMPLETED','','2018-11-16 10:22:01.882000')
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION_CONTEXT WHERE JOB_EXECUTION_ID=85
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(85,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=85
+INSERT INTO BATCH_JOB_EXECUTION VALUES(85,2,85,'2018-11-16 10:22:01.540000','2018-11-16 10:22:01.577000','2018-11-16 10:22:01.895000','COMPLETED','COMPLETED','','2018-11-16 10:22:01.896000',NULL)
+COMMIT
+DISCONNECT
+/*C270*/DISCONNECT
+/*C271*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C272*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(86)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=85
+INSERT INTO BATCH_JOB_INSTANCE VALUES(86,0,'partitionJob','e8cbeab9d2e1cd01a3e43c7501b7953c')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(86)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=85
+INSERT INTO BATCH_JOB_EXECUTION VALUES(86,0,86,'2018-11-16 10:23:44.405000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 10:23:44.405000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(86,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542331423180-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(86,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=86
+INSERT INTO BATCH_JOB_EXECUTION VALUES(86,1,86,'2018-11-16 10:23:44.405000','2018-11-16 10:23:44.441000',NULL,'STARTED','UNKNOWN','','2018-11-16 10:23:44.442000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(266)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=265
+INSERT INTO BATCH_STEP_EXECUTION VALUES(266,0,'step',86,'2018-11-16 10:23:44.467000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.468000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(266,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=266
+INSERT INTO BATCH_STEP_EXECUTION VALUES(266,1,'step',86,'2018-11-16 10:23:44.473000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.474000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=266
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(266,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(267)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=266
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(268)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=267
+INSERT INTO BATCH_STEP_EXECUTION VALUES(267,0,'step1:partition1',86,'2018-11-16 10:23:44.514000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.523000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(268,0,'step1:partition0',86,'2018-11-16 10:23:44.519000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.523000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(268,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv"}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(267,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION VALUES(268,1,'step1:partition0',86,'2018-11-16 10:23:44.537000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.539000')
+COMMIT
+/*C273*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION VALUES(267,1,'step1:partition1',86,'2018-11-16 10:23:44.537000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.641000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(268,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C272*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(267,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(268,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",70],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",5],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":5,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION VALUES(268,2,'step1:partition0',86,'2018-11-16 10:23:44.537000',NULL,'STARTED',1,5,0,5,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.706000')
+COMMIT
+/*C273*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(267,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION VALUES(267,2,'step1:partition1',86,'2018-11-16 10:23:44.537000',NULL,'STARTED',1,2,0,2,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.712000')
+COMMIT
+/*C272*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(268,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION VALUES(268,3,'step1:partition0',86,'2018-11-16 10:23:44.537000',NULL,'STARTED',2,6,0,6,0,0,0,0,'EXECUTING','','2018-11-16 10:23:44.718000')
+COMMIT
+/*C273*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(267,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C272*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(268,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C273*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=267
+INSERT INTO BATCH_STEP_EXECUTION VALUES(267,3,'step1:partition1',86,'2018-11-16 10:23:44.537000','2018-11-16 10:23:44.726000','COMPLETED',1,2,0,2,0,0,0,0,'COMPLETED','','2018-11-16 10:23:44.727000')
+COMMIT
+/*C272*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=268
+INSERT INTO BATCH_STEP_EXECUTION VALUES(268,4,'step1:partition0',86,'2018-11-16 10:23:44.537000','2018-11-16 10:23:44.729000','COMPLETED',2,6,0,6,0,0,0,0,'COMPLETED','','2018-11-16 10:23:44.730000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=266
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(266,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=266
+INSERT INTO BATCH_STEP_EXECUTION VALUES(266,2,'step',86,'2018-11-16 10:23:44.473000','2018-11-16 10:23:44.744000','COMPLETED',3,8,0,8,0,0,0,0,'COMPLETED','','2018-11-16 10:23:44.745000')
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION_CONTEXT WHERE JOB_EXECUTION_ID=86
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(86,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=86
+INSERT INTO BATCH_JOB_EXECUTION VALUES(86,2,86,'2018-11-16 10:23:44.405000','2018-11-16 10:23:44.441000','2018-11-16 10:23:44.757000','COMPLETED','COMPLETED','','2018-11-16 10:23:44.758000',NULL)
+COMMIT
+DISCONNECT
+/*C273*/DISCONNECT
+/*C274*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C275*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(87)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=86
+INSERT INTO BATCH_JOB_INSTANCE VALUES(87,0,'partitionJob','d8970ac394cbbf3cd370f49ea2e184f8')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(87)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=86
+INSERT INTO BATCH_JOB_EXECUTION VALUES(87,0,87,'2018-11-16 10:31:21.504000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 10:31:21.504000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(87,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542331880280-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(87,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=87
+INSERT INTO BATCH_JOB_EXECUTION VALUES(87,1,87,'2018-11-16 10:31:21.504000','2018-11-16 10:31:21.541000',NULL,'STARTED','UNKNOWN','','2018-11-16 10:31:21.542000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(269)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=268
+INSERT INTO BATCH_STEP_EXECUTION VALUES(269,0,'step',87,'2018-11-16 10:31:21.566000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.567000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(269,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=269
+INSERT INTO BATCH_STEP_EXECUTION VALUES(269,1,'step',87,'2018-11-16 10:31:21.572000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.573000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=269
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(269,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(270)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=269
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(271)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=270
+INSERT INTO BATCH_STEP_EXECUTION VALUES(270,0,'step1:partition0',87,'2018-11-16 10:31:21.618000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.622000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(271,0,'step1:partition1',87,'2018-11-16 10:31:21.614000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.622000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(270,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv"}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(271,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION VALUES(270,1,'step1:partition0',87,'2018-11-16 10:31:21.637000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.639000')
+COMMIT
+/*C276*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION VALUES(271,1,'step1:partition1',87,'2018-11-16 10:31:21.637000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.741000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(270,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C275*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(271,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(271,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION VALUES(271,2,'step1:partition1',87,'2018-11-16 10:31:21.637000',NULL,'STARTED',1,2,0,2,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.806000')
+COMMIT
+/*C276*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(270,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",70],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",5],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":5,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION VALUES(270,2,'step1:partition0',87,'2018-11-16 10:31:21.637000',NULL,'STARTED',1,5,0,5,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.811000')
+COMMIT
+/*C275*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(271,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=271
+INSERT INTO BATCH_STEP_EXECUTION VALUES(271,3,'step1:partition1',87,'2018-11-16 10:31:21.637000','2018-11-16 10:31:21.819000','COMPLETED',1,2,0,2,0,0,0,0,'COMPLETED','','2018-11-16 10:31:21.819000')
+COMMIT
+/*C276*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(270,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION VALUES(270,3,'step1:partition0',87,'2018-11-16 10:31:21.637000',NULL,'STARTED',2,6,0,6,0,0,0,0,'EXECUTING','','2018-11-16 10:31:21.819000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(270,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=270
+INSERT INTO BATCH_STEP_EXECUTION VALUES(270,4,'step1:partition0',87,'2018-11-16 10:31:21.637000','2018-11-16 10:31:21.832000','COMPLETED',2,6,0,6,0,0,0,0,'COMPLETED','','2018-11-16 10:31:21.832000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=269
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(269,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=269
+INSERT INTO BATCH_STEP_EXECUTION VALUES(269,2,'step',87,'2018-11-16 10:31:21.572000','2018-11-16 10:31:21.842000','COMPLETED',3,8,0,8,0,0,0,0,'COMPLETED','','2018-11-16 10:31:21.843000')
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION_CONTEXT WHERE JOB_EXECUTION_ID=87
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(87,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=87
+INSERT INTO BATCH_JOB_EXECUTION VALUES(87,2,87,'2018-11-16 10:31:21.504000','2018-11-16 10:31:21.541000','2018-11-16 10:31:21.853000','COMPLETED','COMPLETED','','2018-11-16 10:31:21.854000',NULL)
+COMMIT
+DISCONNECT
+/*C275*/DISCONNECT
+/*C277*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C278*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(88)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=87
+INSERT INTO BATCH_JOB_INSTANCE VALUES(88,0,'partitionJob','f43c737152be7bba085a9b9ae0ba7eae')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(88)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=87
+INSERT INTO BATCH_JOB_EXECUTION VALUES(88,0,88,'2018-11-16 11:13:18.986000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 11:13:18.986000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(88,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542334397751-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(88,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=88
+INSERT INTO BATCH_JOB_EXECUTION VALUES(88,1,88,'2018-11-16 11:13:18.986000','2018-11-16 11:13:19.024000',NULL,'STARTED','UNKNOWN','','2018-11-16 11:13:19.026000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(272)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=271
+INSERT INTO BATCH_STEP_EXECUTION VALUES(272,0,'step',88,'2018-11-16 11:13:19.052000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.053000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(272,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=272
+INSERT INTO BATCH_STEP_EXECUTION VALUES(272,1,'step',88,'2018-11-16 11:13:19.059000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.060000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=272
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(272,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(273)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=272
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(274)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=273
+INSERT INTO BATCH_STEP_EXECUTION VALUES(273,0,'step1:partition1',88,'2018-11-16 11:13:19.103000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.111000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(274,0,'step1:partition0',88,'2018-11-16 11:13:19.106000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.111000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(273,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv"}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(274,'{"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION VALUES(274,1,'step1:partition0',88,'2018-11-16 11:13:19.124000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.126000')
+COMMIT
+/*C279*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION VALUES(273,1,'step1:partition1',88,'2018-11-16 11:13:19.124000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.228000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(274,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C278*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(273,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",0],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":0,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(274,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION VALUES(274,2,'step1:partition0',88,'2018-11-16 11:13:19.124000',NULL,'STARTED',1,6,0,6,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.303000')
+COMMIT
+/*C279*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(273,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION VALUES(273,2,'step1:partition1',88,'2018-11-16 11:13:19.124000',NULL,'STARTED',1,2,0,2,0,0,0,0,'EXECUTING','','2018-11-16 11:13:19.310000')
+COMMIT
+/*C278*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(274,'{"outputFile":"file:./build/output/file/delimited.csv","FlatFileItemWriter.current.count":["java.lang.Long",84],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited.csv","FlatFileItemWriter.written":["java.lang.Long",6],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":7,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C279*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(273,'{"outputFile":"file:./build/output/file/delimited2.csv","FlatFileItemWriter.current.count":["java.lang.Long",28],"fileName":"file:/C:/Users/v.jyheo/git/camelBatch/target/classes/data/iosample/input/delimited2.csv","FlatFileItemWriter.written":["java.lang.Long",2],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","FlatFileItemReader.read.count":3,"batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep"}',NULL)
+COMMIT
+/*C278*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=274
+INSERT INTO BATCH_STEP_EXECUTION VALUES(274,3,'step1:partition0',88,'2018-11-16 11:13:19.124000','2018-11-16 11:13:19.318000','COMPLETED',1,6,0,6,0,0,0,0,'COMPLETED','','2018-11-16 11:13:19.318000')
+COMMIT
+/*C279*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=273
+INSERT INTO BATCH_STEP_EXECUTION VALUES(273,3,'step1:partition1',88,'2018-11-16 11:13:19.124000','2018-11-16 11:13:19.320000','COMPLETED',1,2,0,2,0,0,0,0,'COMPLETED','','2018-11-16 11:13:19.321000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=272
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(272,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",2],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=272
+INSERT INTO BATCH_STEP_EXECUTION VALUES(272,2,'step',88,'2018-11-16 11:13:19.059000','2018-11-16 11:13:19.332000','COMPLETED',2,8,0,8,0,0,0,0,'COMPLETED','','2018-11-16 11:13:19.332000')
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION_CONTEXT WHERE JOB_EXECUTION_ID=88
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(88,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=88
+INSERT INTO BATCH_JOB_EXECUTION VALUES(88,2,88,'2018-11-16 11:13:18.986000','2018-11-16 11:13:19.024000','2018-11-16 11:13:19.343000','COMPLETED','COMPLETED','','2018-11-16 11:13:19.343000',NULL)
+COMMIT
+DISCONNECT
+/*C278*/DISCONNECT
+/*C280*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C281*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(89)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=88
+INSERT INTO BATCH_JOB_INSTANCE VALUES(89,0,'partitinnerJob','afaf5a2b0d0db2f3183cf2359dfb5835')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(89)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=88
+INSERT INTO BATCH_JOB_EXECUTION VALUES(89,0,89,'2018-11-16 11:20:33.966000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 11:20:33.966000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(89,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542334832737-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(89,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=89
+INSERT INTO BATCH_JOB_EXECUTION VALUES(89,1,89,'2018-11-16 11:20:33.966000','2018-11-16 11:20:34.003000',NULL,'STARTED','UNKNOWN','','2018-11-16 11:20:34.004000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(275)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=274
+INSERT INTO BATCH_STEP_EXECUTION VALUES(275,0,'partitinnerJob-master.Step',89,'2018-11-16 11:20:34.029000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.029000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(275,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=275
+INSERT INTO BATCH_STEP_EXECUTION VALUES(275,1,'partitinnerJob-master.Step',89,'2018-11-16 11:20:34.036000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.036000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=275
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(275,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",4],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(276)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=275
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(277)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=276
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(278)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=277
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(279)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=278
+INSERT INTO BATCH_STEP_EXECUTION VALUES(276,0,'partitinnerJob-slave.Step:Thread:-3',89,'2018-11-16 11:20:34.081000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.092000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(277,0,'partitinnerJob-slave.Step:Thread:-1',89,'2018-11-16 11:20:34.088000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.092000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(278,0,'partitinnerJob-slave.Step:Thread:-0',89,'2018-11-16 11:20:34.077000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.092000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(279,0,'partitinnerJob-slave.Step:Thread:-2',89,'2018-11-16 11:20:34.084000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.092000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(276,'{"endingIndex":20,"filePath":"temp20","startingIndex":16}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(277,'{"endingIndex":10,"filePath":"temp10","startingIndex":6}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(278,'{"endingIndex":5,"filePath":"temp5","startingIndex":0}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(279,'{"endingIndex":15,"filePath":"temp15","startingIndex":11}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=277
+INSERT INTO BATCH_STEP_EXECUTION VALUES(277,1,'partitinnerJob-slave.Step:Thread:-1',89,'2018-11-16 11:20:34.109000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.112000')
+COMMIT
+/*C282*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=278
+INSERT INTO BATCH_STEP_EXECUTION VALUES(278,1,'partitinnerJob-slave.Step:Thread:-0',89,'2018-11-16 11:20:34.109000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.214000')
+COMMIT
+/*C284*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=276
+INSERT INTO BATCH_STEP_EXECUTION VALUES(276,1,'partitinnerJob-slave.Step:Thread:-3',89,'2018-11-16 11:20:34.109000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.214000')
+COMMIT
+/*C281*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=277
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(277,'{"FlatFileItemWriter.current.count":["java.lang.Long",0],"endingIndex":10,"FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp10","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":6}',NULL)
+COMMIT
+/*C283*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=279
+INSERT INTO BATCH_STEP_EXECUTION VALUES(279,1,'partitinnerJob-slave.Step:Thread:-2',89,'2018-11-16 11:20:34.110000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.214000')
+COMMIT
+/*C284*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=278
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(278,'{"FlatFileItemWriter.current.count":["java.lang.Long",0],"endingIndex":5,"FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp5","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":0}',NULL)
+COMMIT
+/*C281*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=276
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(276,'{"FlatFileItemWriter.current.count":["java.lang.Long",0],"endingIndex":20,"FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp20","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":16}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=279
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(279,'{"FlatFileItemWriter.current.count":["java.lang.Long",0],"endingIndex":15,"FlatFileItemWriter.written":["java.lang.Long",0],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp15","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":11}',NULL)
+COMMIT
+/*C283*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=276
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(276,'{"FlatFileItemWriter.current.count":["java.lang.Long",35],"endingIndex":20,"FlatFileItemWriter.written":["java.lang.Long",1],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp20","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":16}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=276
+INSERT INTO BATCH_STEP_EXECUTION VALUES(276,2,'partitinnerJob-slave.Step:Thread:-3',89,'2018-11-16 11:20:34.109000',NULL,'STARTED',1,1,0,1,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.317000')
+COMMIT
+/*C282*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=278
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(278,'{"FlatFileItemWriter.current.count":["java.lang.Long",35],"endingIndex":5,"FlatFileItemWriter.written":["java.lang.Long",1],"batch.taskletType":"org.springframework.batch.core.step.item.ChunkOrientedTasklet","filePath":"temp5","batch.stepType":"org.springframework.batch.core.step.tasklet.TaskletStep","startingIndex":0}',NULL)
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=278
+INSERT INTO BATCH_STEP_EXECUTION VALUES(278,2,'partitinnerJob-slave.Step:Thread:-0',89,'2018-11-16 11:20:34.109000',NULL,'STARTED',1,1,0,1,0,0,0,0,'EXECUTING','','2018-11-16 11:20:34.323000')
+COMMIT

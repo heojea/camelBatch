@@ -17,8 +17,12 @@
 package org.apache.camel.component.spring.batch.support;
 
 import org.apache.camel.ProducerTemplate;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.annotation.BeforeStep;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemProcessor;
 
 /**
@@ -46,5 +50,13 @@ public class CustomCamelItemProcessor<I, O> implements ItemProcessor<I, O> {
         LOG.info("O result [{}]" , result);
         return result;
     }
+    
+	@BeforeStep
+	public void createOutputNameFromInput(StepExecution stepExecution) {
+		ExecutionContext executionContext = stepExecution.getExecutionContext();
+		String inputName = stepExecution.getStepName().replace(":", "-");
+		
+		LOG.info("this class[{}] inputName[{}] stepExecution.getStepName()[{}]  FilenameUtils.getBaseName(inputName)[{}]" ,this.getClass().getName() , inputName , stepExecution.getStepName() ,  FilenameUtils.getBaseName(inputName));
+	}
 
 }
