@@ -36,10 +36,9 @@ public class CustomCamelItemFileReceiveReader<I> extends ServiceSupport implemen
 
     private final CamelContext camelContext;
     private final ConsumerTemplate consumerTemplate;
-
     private final String endpointUri;
 
-    public CustomCamelItemFileReceiveReader(ConsumerTemplate consumerTemplate, String endpointUri) {
+    public CustomCamelItemFileReceiveReader(ConsumerTemplate consumerTemplate, String endpointUri ) {
         this.consumerTemplate = consumerTemplate;
         this.camelContext = consumerTemplate.getCamelContext();
         this.endpointUri = endpointUri;
@@ -56,11 +55,9 @@ public class CustomCamelItemFileReceiveReader<I> extends ServiceSupport implemen
     @Override
     @SuppressWarnings("unchecked")
     public I read() throws Exception {
-    	
-    	System.out.println("CamelItemReader read() 실행");
-    	System.out.println("endpointUri=" + endpointUri);
-    	
         LOG.info("reading new item...");
+        LOG.info("Logic class[{}] endpointUri[{}]" , this.getClass().getName() , endpointUri);
+        
         I item = (I) consumerTemplate.receiveBody(endpointUri);
         LOG.info("read item [{}]", item);
         return item;

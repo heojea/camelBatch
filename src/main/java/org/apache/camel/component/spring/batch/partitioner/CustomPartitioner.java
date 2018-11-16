@@ -12,7 +12,7 @@ public class CustomPartitioner implements Partitioner{
 	private static final Logger LOG = LoggerFactory.getLogger(CamelItemProcessor.class);
 	  @Override
 	  public Map partition(int gridSize) {
-	      //log.debug("START: Partition");
+	      LOG.info("START: Partition");
 		  Map partitionMap = new HashMap();
 		  int startingIndex = 0;
 		  int endingIndex = 5;
@@ -21,6 +21,7 @@ public class CustomPartitioner implements Partitioner{
 		      ExecutionContext ctxMap = new ExecutionContext();
 		      ctxMap.putInt("startingIndex",startingIndex);
 		      ctxMap.putInt("endingIndex", endingIndex);
+		      ctxMap.putString("filePath", "temp" + endingIndex);
 		
 		      startingIndex = endingIndex+1;
 		      endingIndex += 5;
@@ -28,7 +29,7 @@ public class CustomPartitioner implements Partitioner{
 		      partitionMap.put("Thread:-"+i, ctxMap);
 		
 		  }
-		  LOG.debug("END: Created Partitions of size: "+ partitionMap.size());
+		  LOG.info("END: Created Partitions of size: [{}]" , partitionMap.size() );
 		  return partitionMap;
 	  }
 }

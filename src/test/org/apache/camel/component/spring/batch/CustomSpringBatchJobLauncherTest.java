@@ -50,6 +50,13 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     	template.sendBody("direct:start", "Start batch!");
     	//Thread.sleep(40000000);
     }
+
+    @Test
+    public void directPartitionJob() throws InterruptedException {
+    	template.sendBody("direct:partitionJob", "Start batch!");
+    	//Thread.sleep(40000000);
+    }
+    
     
     @Test
     public void cutstomTestPartitionnerJobLauncher() throws InterruptedException {

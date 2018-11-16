@@ -12,6 +12,7 @@
 
 	<!-- import  -->
 	<import resource="common/data-source-context.xml" />
+	<import resource="jobs/partitonFilejob.xml" />
 	
 	<!--###################### JOB standardJob ####################-->
     <batch:job id="standardJob">
@@ -45,13 +46,6 @@
 	<camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
     <camel:template         id="template"         camelContextId="camel"/>
     <camel:camelContext id="camel">
-    	<!-- init start dsl  -->
-		<camel:route>
-			<camel:from uri="timer://initStart?repeatCount=1" />
-			<!-- <camel:to uri="direct:large-file-batch-start"/> -->
-			<camel:to uri="direct:start"/>
-		</camel:route>    
-		
 		<camel:route>
 			<camel:from uri="timer://sedaStart?repeatCount=3" />
 			<camel:setBody><camel:simple> new String[]{"foo", "bar", "baz", null}</camel:simple></camel:setBody>
@@ -61,6 +55,11 @@
         <camel:route>
             <camel:from uri="direct:start"/>
             <camel:to uri="spring-batch:standardJob"/>
+        </camel:route>
+        
+        <camel:route>
+            <camel:from uri="direct:partitionJob"/>
+            <camel:to uri="spring-batch:partitionJob"/>
         </camel:route>
         
         <camel:route>
@@ -100,11 +99,14 @@
 		    <camel:from uri="file://C:/in/?fileName=MyFile.txt"/>
 		    <camel:from uri="file:receiveFile?fileName=MyFile.txt"/>
 		    <camel:to   uri="file:receiveFileComplete?fileName=MyFile.txt"/>
-		    
 		</camel:route> -->
+		
+		<!-- init start dsl  -->
+		<!-- <camel:route>
+			<camel:from uri="timer://initStart?repeatCount=1" />
+			<camel:to uri="direct:start"/>
+		</camel:route> --> 
     </camel:camelContext>
-
-    
 
     <!--###################### Spring Batch infrastructure ####################-->
 	<bean id="myTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
@@ -148,13 +150,14 @@
     
     <bean id="customCamelFileReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReader">
         <constructor-arg ref="consumerTemplate"/>
-        <constructor-arg value="file://receiveFile?noop=false/"/>
+        <constructor-arg value="file://receiveFile?noop=true"/>
+         
         <!-- <constructor-arg value="file:receiveFile?fileName=MyFile.txt"/> -->
     </bean>
     
     <bean id="customCamelItemFileReceiveReader" class="org.apache.camel.component.spring.batch.support.CustomCamelItemFileReceiveReader">
         <constructor-arg ref="consumerTemplate"/>
-        <constructor-arg value="file://receiveFile?noop=false/"/>
+        <constructor-arg value="file:receiveFile?noop=true"/>
     </bean>
 
 	<!--###################### Writer ####################-->
@@ -200,5 +203,5 @@
     </bean>
     
     <!--###################### partitioner ####################-->
-    <bean id="myPartitioner" class="org.apache.camel.component.spring.batch.partitioner.CustomPartitioner" />
+    <bean id="myPartitioner" class="org.apache.camel.component.spring.batch.partitioner.CustomPartitioner" scope="step" />
 </beans>
