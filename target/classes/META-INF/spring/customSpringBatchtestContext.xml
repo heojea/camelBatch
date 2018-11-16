@@ -40,6 +40,7 @@
 	<batch:step id="partitinnerJob-slave.Step">
 	    <batch:tasklet >
 	        <batch:chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="customCamelItemFileWriter" commit-interval="1" />
+	        <!-- <batch:chunk  reader="customCamelFlatItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="customCamelItemFileWriter" commit-interval="1" /> -->
 	        <!-- <chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" /> -->
 	    </batch:tasklet>
 	    <batch:listeners>
@@ -173,6 +174,13 @@
         <constructor-arg ref="consumerTemplate"/>
         <constructor-arg value="file:receiveFile?noop=true"/>
     </bean>
+    
+    <bean id="customCamelFlatItemFileReceiveReader" class="org.apache.camel.component.spring.batch.reader.CustomCamelFlatItemFileReceiveReader">
+        <constructor-arg ref="consumerTemplate"/>
+        <constructor-arg value="file:receiveFile?noop=true"/>
+    </bean>
+    
+    
 
 	<!--###################### Writer ####################-->
     <bean id="customCamelItemWriter" class="org.apache.camel.component.spring.batch.support.CustomCamelItemWriter">

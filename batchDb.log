@@ -272,3 +272,109 @@ INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(342,'{"endingIndex":10,"batch.ta
 DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=342
 INSERT INTO BATCH_STEP_EXECUTION VALUES(342,2,'partitinnerJob-slave.Step:Thread:-1',109,'2018-11-16 16:14:45.525000',NULL,'STARTED',1,1,0,1,0,0,0,0,'EXECUTING','','2018-11-16 16:14:45.661000')
 COMMIT
+DISCONNECT
+/*C114*/DISCONNECT
+/*C112*/DISCONNECT
+/*C115*/DISCONNECT
+/*C102*/DISCONNECT
+/*C103*/DISCONNECT
+/*C104*/DISCONNECT
+/*C105*/DISCONNECT
+/*C116*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C117*/SET SCHEMA PUBLIC
+INSERT INTO BATCH_JOB_SEQ VALUES(110)
+DELETE FROM BATCH_JOB_SEQ WHERE ID=109
+INSERT INTO BATCH_JOB_INSTANCE VALUES(110,0,'partitinnerJob','bf5ef7a485c9b47c37aa598a3b976bd8')
+INSERT INTO BATCH_JOB_EXECUTION_SEQ VALUES(110)
+DELETE FROM BATCH_JOB_EXECUTION_SEQ WHERE ID=109
+INSERT INTO BATCH_JOB_EXECUTION VALUES(110,0,110,'2018-11-16 17:26:02.263000',NULL,NULL,'STARTING','UNKNOWN','','2018-11-16 17:26:02.263000',NULL)
+INSERT INTO BATCH_JOB_EXECUTION_PARAMS VALUES(110,'STRING','breadcrumbId','ID-DESKTOP-0BKCFKT-1542356761048-0-5','1970-01-01 09:00:00.000000',0,0.0E0,'Y')
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(110,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=110
+INSERT INTO BATCH_JOB_EXECUTION VALUES(110,1,110,'2018-11-16 17:26:02.263000','2018-11-16 17:26:02.301000',NULL,'STARTED','UNKNOWN','','2018-11-16 17:26:02.302000',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(344)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=343
+INSERT INTO BATCH_STEP_EXECUTION VALUES(344,0,'partitinnerJob-master.Step',110,'2018-11-16 17:26:02.332000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.333000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(344,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=344
+INSERT INTO BATCH_STEP_EXECUTION VALUES(344,1,'partitinnerJob-master.Step',110,'2018-11-16 17:26:02.339000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.340000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=344
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(344,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",4],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(345)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=344
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(346)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=345
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(347)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=346
+INSERT INTO BATCH_STEP_EXECUTION_SEQ VALUES(348)
+DELETE FROM BATCH_STEP_EXECUTION_SEQ WHERE ID=347
+INSERT INTO BATCH_STEP_EXECUTION VALUES(345,0,'partitinnerJob-slave.Step:Thread:-1',110,'2018-11-16 17:26:02.393000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.397000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(346,0,'partitinnerJob-slave.Step:Thread:-0',110,'2018-11-16 17:26:02.381000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.397000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(347,0,'partitinnerJob-slave.Step:Thread:-2',110,'2018-11-16 17:26:02.389000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.397000')
+INSERT INTO BATCH_STEP_EXECUTION VALUES(348,0,'partitinnerJob-slave.Step:Thread:-3',110,'2018-11-16 17:26:02.385000',NULL,'STARTING',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.397000')
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(345,'{"endingIndex":10,"filePath":"temp10","startingIndex":6}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(346,'{"endingIndex":5,"filePath":"temp5","startingIndex":0}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(347,'{"endingIndex":15,"filePath":"temp15","startingIndex":11}',NULL)
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(348,'{"endingIndex":20,"filePath":"temp20","startingIndex":16}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=345
+INSERT INTO BATCH_STEP_EXECUTION VALUES(345,1,'partitinnerJob-slave.Step:Thread:-1',110,'2018-11-16 17:26:02.419000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.422000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=345
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(345,'{"endingIndex":10,"filePath":"temp10","startingIndex":6}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=345
+INSERT INTO BATCH_STEP_EXECUTION VALUES(345,2,'partitinnerJob-slave.Step:Thread:-1',110,'2018-11-16 17:26:02.419000','2018-11-16 17:26:02.458000','FAILED',0,0,0,0,0,0,0,0,'FAILED','org.springframework.batch.item.ItemStreamException: Failed to initialize the reader\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:149)\u000d\u000a\u0009at org.springframework.batch.item.support.CompositeItemStream.open(CompositeItemStream.java:103)\u000d\u000a\u0009at org.springframework.batch.core.step.tasklet.TaskletStep.open(TaskletStep.java:310)\u000d\u000a\u0009at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:197)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:139)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:136)\u000d\u000a\u0009at java.util.concurrent.FutureTask.run(FutureTask.java:266)\u000d\u000a\u0009at java.lang.Thread.run(Thread.java:748)\u000d\u000aCaused by: java.lang.IllegalArgumentException: Input resource must be set\u000d\u000a\u0009at org.springframework.util.Assert.notNull(Assert.java:193)\u000d\u000a\u0009at org.springframework.batch.item.file.FlatFileItemReader.doOpen(FlatFileItemReader.java:245)\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:146)\u000d\u000a\u0009... 7 more\u000d\u000a','2018-11-16 17:26:02.459000')
+COMMIT
+/*C118*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=347
+INSERT INTO BATCH_STEP_EXECUTION VALUES(347,1,'partitinnerJob-slave.Step:Thread:-2',110,'2018-11-16 17:26:02.420000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.524000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=347
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(347,'{"endingIndex":15,"filePath":"temp15","startingIndex":11}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=347
+INSERT INTO BATCH_STEP_EXECUTION VALUES(347,2,'partitinnerJob-slave.Step:Thread:-2',110,'2018-11-16 17:26:02.420000','2018-11-16 17:26:02.535000','FAILED',0,0,0,0,0,0,0,0,'FAILED','org.springframework.batch.item.ItemStreamException: Failed to initialize the reader\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:149)\u000d\u000a\u0009at org.springframework.batch.item.support.CompositeItemStream.open(CompositeItemStream.java:103)\u000d\u000a\u0009at org.springframework.batch.core.step.tasklet.TaskletStep.open(TaskletStep.java:310)\u000d\u000a\u0009at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:197)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:139)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:136)\u000d\u000a\u0009at java.util.concurrent.FutureTask.run(FutureTask.java:266)\u000d\u000a\u0009at java.lang.Thread.run(Thread.java:748)\u000d\u000aCaused by: java.lang.IllegalArgumentException: Input resource must be set\u000d\u000a\u0009at org.springframework.util.Assert.notNull(Assert.java:193)\u000d\u000a\u0009at org.springframework.batch.item.file.FlatFileItemReader.doOpen(FlatFileItemReader.java:245)\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:146)\u000d\u000a\u0009... 7 more\u000d\u000a','2018-11-16 17:26:02.536000')
+COMMIT
+/*C119*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=346
+INSERT INTO BATCH_STEP_EXECUTION VALUES(346,1,'partitinnerJob-slave.Step:Thread:-0',110,'2018-11-16 17:26:02.420000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.537000')
+COMMIT
+/*C120*/SET SCHEMA PUBLIC
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=348
+INSERT INTO BATCH_STEP_EXECUTION VALUES(348,1,'partitinnerJob-slave.Step:Thread:-3',110,'2018-11-16 17:26:02.419000',NULL,'STARTED',0,0,0,0,0,0,0,0,'EXECUTING','','2018-11-16 17:26:02.537000')
+COMMIT
+/*C119*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=346
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(346,'{"endingIndex":5,"filePath":"temp5","startingIndex":0}',NULL)
+COMMIT
+/*C120*/DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=348
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(348,'{"endingIndex":20,"filePath":"temp20","startingIndex":16}',NULL)
+COMMIT
+/*C119*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=346
+INSERT INTO BATCH_STEP_EXECUTION VALUES(346,2,'partitinnerJob-slave.Step:Thread:-0',110,'2018-11-16 17:26:02.420000','2018-11-16 17:26:02.554000','FAILED',0,0,0,0,0,0,0,0,'FAILED','org.springframework.batch.item.ItemStreamException: Failed to initialize the reader\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:149)\u000d\u000a\u0009at org.springframework.batch.item.support.CompositeItemStream.open(CompositeItemStream.java:103)\u000d\u000a\u0009at org.springframework.batch.core.step.tasklet.TaskletStep.open(TaskletStep.java:310)\u000d\u000a\u0009at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:197)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:139)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:136)\u000d\u000a\u0009at java.util.concurrent.FutureTask.run(FutureTask.java:266)\u000d\u000a\u0009at java.lang.Thread.run(Thread.java:748)\u000d\u000aCaused by: java.lang.IllegalArgumentException: Input resource must be set\u000d\u000a\u0009at org.springframework.util.Assert.notNull(Assert.java:193)\u000d\u000a\u0009at org.springframework.batch.item.file.FlatFileItemReader.doOpen(FlatFileItemReader.java:245)\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:146)\u000d\u000a\u0009... 7 more\u000d\u000a','2018-11-16 17:26:02.555000')
+COMMIT
+/*C120*/DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=348
+INSERT INTO BATCH_STEP_EXECUTION VALUES(348,2,'partitinnerJob-slave.Step:Thread:-3',110,'2018-11-16 17:26:02.419000','2018-11-16 17:26:02.557000','FAILED',0,0,0,0,0,0,0,0,'FAILED','org.springframework.batch.item.ItemStreamException: Failed to initialize the reader\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:149)\u000d\u000a\u0009at org.springframework.batch.item.support.CompositeItemStream.open(CompositeItemStream.java:103)\u000d\u000a\u0009at org.springframework.batch.core.step.tasklet.TaskletStep.open(TaskletStep.java:310)\u000d\u000a\u0009at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:197)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:139)\u000d\u000a\u0009at org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler$1.call(TaskExecutorPartitionHandler.java:136)\u000d\u000a\u0009at java.util.concurrent.FutureTask.run(FutureTask.java:266)\u000d\u000a\u0009at java.lang.Thread.run(Thread.java:748)\u000d\u000aCaused by: java.lang.IllegalArgumentException: Input resource must be set\u000d\u000a\u0009at org.springframework.util.Assert.notNull(Assert.java:193)\u000d\u000a\u0009at org.springframework.batch.item.file.FlatFileItemReader.doOpen(FlatFileItemReader.java:245)\u000d\u000a\u0009at org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader.open(AbstractItemCountingItemStreamItemReader.java:146)\u000d\u000a\u0009... 7 more\u000d\u000a','2018-11-16 17:26:02.558000')
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION_CONTEXT WHERE STEP_EXECUTION_ID=344
+INSERT INTO BATCH_STEP_EXECUTION_CONTEXT VALUES(344,'{"SimpleStepExecutionSplitter.GRID_SIZE":["java.lang.Long",4],"batch.stepType":"org.springframework.batch.core.partition.support.PartitionStep"}',NULL)
+COMMIT
+DELETE FROM BATCH_STEP_EXECUTION WHERE STEP_EXECUTION_ID=344
+INSERT INTO BATCH_STEP_EXECUTION VALUES(344,2,'partitinnerJob-master.Step',110,'2018-11-16 17:26:02.339000','2018-11-16 17:26:02.574000','FAILED',0,0,0,0,0,0,0,0,'FAILED','org.springframework.batch.core.JobExecutionException: Partition handler returned an unsuccessful step\u000d\u000a\u0009at org.springframework.batch.core.partition.support.PartitionStep.doExecute(PartitionStep.java:112)\u000d\u000a\u0009at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:200)\u000d\u000a\u0009at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148)\u000d\u000a\u0009at org.springframework.batch.core.job.flow.JobFlowExecutor.executeStep(JobFlowExecutor.java:66)\u000d\u000a\u0009at org.springframework.batch.core.job.flow.support.state.StepState.handle(StepState.java:67)\u000d\u000a\u0009at org.springframework.batch.core.job.flow.support.SimpleFlow.resume(SimpleFlow.java:169)\u000d\u000a\u0009at org.springframework.batch.core.job.flow.support.SimpleFlow.start(SimpleFlow.java:144)\u000d\u000a\u0009at org.springframework.batch.core.job.flow.FlowJob.doExecute(FlowJob.java:136)\u000d\u000a\u0009at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:308)\u000d\u000a\u0009at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:141)\u000d\u000a\u0009at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50)\u000d\u000a\u0009at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:134)\u000d\u000a\u0009at org.apache.camel.component.spring.batch.SpringBatchProducer.process(SpringBatchProducer.java:73)\u000d\u000a\u0009at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)\u000d\u000a\u0009at org.apache.camel.processor.SendProcessor.process(SendProcessor.java:148)\u000d\u000a\u0009at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:548)\u000d\u000a\u0009at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:201)\u000d\u000a\u0009at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:201)\u000d\u000a\u0009at org.apache.camel.component.direct.DirectProducer.process(DirectProducer.java:76)\u000d\u000a\u0009at org.apache.camel.processor.SharedCamelInternalProcessor.process(SharedCamelInternalProcessor.java:186)\u000d\u000a\u0009at org.apache.camel.processor.SharedCamelInternalProcessor.process(SharedCamelInternalProcessor.java:86)\u000d\u000a\u0009at org.apache.camel.impl.ProducerCache$1.doInProducer(ProducerCache.java:541)\u000d\u000a\u0009at org.apache.camel.impl.ProducerCache$1.doInProducer(ProducerCache.java:506)\u000d\u000a\u0009at org.apache.camel.impl.ProducerCache.doInProducer(ProducerCache.java:369)\u000d\u000a\u0009at org.apache.camel.impl.ProducerCache.sendExchange(ProducerCache.java:506)\u000d\u000a\u0009at org.apache.camel.impl.ProducerCache.send(ProducerCache.java','2018-11-16 17:26:02.575000')
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION_CONTEXT WHERE JOB_EXECUTION_ID=110
+INSERT INTO BATCH_JOB_EXECUTION_CONTEXT VALUES(110,'{}',NULL)
+COMMIT
+DELETE FROM BATCH_JOB_EXECUTION WHERE JOB_EXECUTION_ID=110
+INSERT INTO BATCH_JOB_EXECUTION VALUES(110,2,110,'2018-11-16 17:26:02.263000','2018-11-16 17:26:02.301000','2018-11-16 17:26:02.587000','FAILED','FAILED','','2018-11-16 17:26:02.587000',NULL)
+COMMIT
+DISCONNECT
+/*C117*/DISCONNECT
+/*C118*/DISCONNECT
+/*C119*/DISCONNECT
