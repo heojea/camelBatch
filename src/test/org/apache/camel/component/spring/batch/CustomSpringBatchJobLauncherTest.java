@@ -39,7 +39,6 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-
         for (String message : inputMessages) {
             template.sendBody("seda:inputQueue", message);
         }
@@ -48,7 +47,6 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     @Test
     public void cutstomTestJobLauncher() throws InterruptedException {
     	template.sendBody("direct:start", "Start batch!");
-    	//Thread.sleep(40000000);
     }
 
     @Test
@@ -57,16 +55,13 @@ public class CustomSpringBatchJobLauncherTest extends CamelSpringTestSupport {
     	//Thread.sleep(40000000);
     }
     
-    
     @Test
     public void cutstomTestPartitionnerJobLauncher() throws InterruptedException {
     	template.sendBody("direct:large-file-batch-start", "Start batch!");
-    	
     }
 
     @Override
     protected AbstractApplicationContext createApplicationContext() {
         return new ClassPathXmlApplicationContext("META-INF/spring/customSpringBatchtestContext.xml");
-        
     }
 }

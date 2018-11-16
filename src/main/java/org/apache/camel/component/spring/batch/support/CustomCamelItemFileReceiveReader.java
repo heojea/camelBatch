@@ -46,7 +46,7 @@ public class CustomCamelItemFileReceiveReader<I> extends ServiceSupport implemen
 
     @Override
     public void afterPropertiesSet() throws Exception {
-    	LOG.debug(this.getClass().getName() + " afterPropertiesSet() 실행");
+    	LOG.info(this.getClass().getName() + " afterPropertiesSet() 실행");
         ObjectHelper.notNull(camelContext, "CamelContext", this);
         // register this as service so we get lifecycle callback when Camel is starting/stopping
         camelContext.addService(this);
@@ -55,9 +55,7 @@ public class CustomCamelItemFileReceiveReader<I> extends ServiceSupport implemen
     @Override
     @SuppressWarnings("unchecked")
     public I read() throws Exception {
-        LOG.info("reading new item...");
-        LOG.info("Logic class[{}] endpointUri[{}]" , this.getClass().getName() , endpointUri);
-        
+        LOG.info("Ready... Logic class[{}] endpointUri[{}]" , this.getClass().getName() , endpointUri);
         I item = (I) consumerTemplate.receiveBody(endpointUri);
         LOG.info("read item [{}]", item);
         return item;

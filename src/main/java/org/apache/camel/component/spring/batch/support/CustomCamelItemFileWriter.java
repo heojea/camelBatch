@@ -39,6 +39,7 @@ public class CustomCamelItemFileWriter<I> implements ItemWriter<I> {
     @Override
     public void write(List<? extends I> items) throws Exception {
     	System.out.println("CamelItemWriter write");
+    	LOG.info("logic class[{}] endpointUri [{}]  items[{}]" , this.getClass().getName() , endpointUri ,items );
         for (I item : items) {
             LOG.info("writing item [{}]...", item);
             producerTemplate.sendBody(endpointUri, item);

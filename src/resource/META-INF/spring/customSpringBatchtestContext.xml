@@ -38,7 +38,9 @@
 	
 	<step id="partitinnerJob-slave.Step" xmlns="http://www.springframework.org/schema/batch">
 	    <tasklet >
-	        <chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" />
+	    
+	        <chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="customCamelItemFileWriter" commit-interval="1" />
+	        <!-- <chunk  reader="customCamelItemFileReceiveReader"  processor="customCamelItemProcessor"  writer="flatFileItemWriter" commit-interval="1" /> -->
 	    </tasklet>
 	</step>
 
@@ -46,11 +48,11 @@
 	<camel:consumerTemplate id="consumerTemplate" camelContextId="camel"/>
     <camel:template         id="template"         camelContextId="camel"/>
     <camel:camelContext id="camel">
-		<camel:route>
+		<!-- <camel:route>
 			<camel:from uri="timer://sedaStart?repeatCount=3" />
 			<camel:setBody><camel:simple> new String[]{"foo", "bar", "baz", null}</camel:simple></camel:setBody>
 			<camel:to uri="seda:inputQueue"/>
-		</camel:route>
+		</camel:route> -->
     
         <camel:route>
             <camel:from uri="direct:start"/>
@@ -172,6 +174,7 @@
     
     <bean id="flatFileItemWriter" class="org.springframework.batch.item.file.FlatFileItemWriter" scope="step">
         <property name="resource" value="file:csv/output/person.data#{stepExecutionContext[startingIndex]}-#{stepExecutionContext[endingIndex]}.csv"/>
+        
         <property name="appendAllowed" value="false"/>
         <property name="lineAggregator">
             <bean class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
